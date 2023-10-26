@@ -1,3 +1,8 @@
 <template>
-  <h1>You've redirected to the menu</h1>
+  <section>
+    Filter
+  </section>
+  <section>
+    List of coaches
+  </section>
 </template>
