@@ -1,21 +1,23 @@
 <template>
   <section>Filter</section>
   <section>
-    <div class="controls">
-      <button>Refresh</button>
-      <router-link to="/create">Create New Menu</router-link>
-    </div>
-    <ul v-if="hasMenus">
-      <menu-item
-        v-for="menu in filteredMenus"
-        :key="menu.id"
-        :id="menu.id"
-        :itemName="menu.itemName"
-        :price="menu.price"
-        :areas="menu.areas"
-      ></menu-item>
-    </ul>
-    <h3 v-else>No menus found</h3>
+    <base-card>
+      <div class="controls">
+        <base-button mode="outline">Refresh</base-button>
+        <base-button link to="/create">Create New Menu</base-button>
+      </div>
+      <ul v-if="hasMenus">
+        <menu-item
+          v-for="menu in filteredMenus"
+          :key="menu.id"
+          :id="menu.id"
+          :itemName="menu.itemName"
+          :price="menu.price"
+          :types="menu.types"
+        ></menu-item>
+      </ul>
+      <h3 v-else>No menus found</h3>
+    </base-card>
   </section>
 </template>
 

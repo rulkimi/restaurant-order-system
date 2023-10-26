@@ -3,17 +3,17 @@
     <h3>{{ itemName }}</h3>
     <h4>${{ price }}</h4>
     <div>
-      <span v-for="area in areas" :key="area">{{ area }}</span>
+      <base-badge v-for="type in types" :key="type" :type="type"></base-badge>
     </div>
     <div class="actions">
-      <router-link :to="viewDetailsLink">View details</router-link>
+      <base-button link :to="viewDetailsLink" mode="outline">View details</base-button>
     </div>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['id', 'itemName', 'price', 'areas'],
+  props: ['id', 'itemName', 'price', 'types'],
   computed: {
     viewDetailsLink() {
       return `${this.$route.path}/${this.id}`;
