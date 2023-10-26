@@ -11,7 +11,7 @@ const routes = [
     component: () => import('../views/menus/MenusLists.vue'),
   },
   {
-    path: '/menus:id',
+    path: '/menus/:id',
     component: () => import('../views/menus/MenuDetails.vue'),
   },
   {
