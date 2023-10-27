@@ -20,9 +20,9 @@
 export default {
   props: ['id', 'itemName', 'price', 'types'],
   data() {
+    //default amount is when theres no item found, we add 1 to the amount
     return {
-      amount: 0,
-      order: [],
+      defaultAmount: 1,
     };
   },
   computed: {
@@ -35,19 +35,32 @@ export default {
     totalPrice() {
       return this.amount * this.price;
     },
-  },
-  watch: {
-    amount(value) {
-      if (value < 0) {
-        this.amount = 0;
-      }
+    amount: {
+      get() {
+        //get order amount from 'database'
+        const orders = this.$store.getters['orders/orders'];
+        const existingItem = orders.find(
+          (item) => item.itemId === this.id
+        );
+        return existingItem ? existingItem.amount : 0;
+      },
+      set(value) {
+        // To be implemented if needed
+      },
     },
   },
+  // watch: {
+  //   amount(value) {
+  //     if (value < 0) {
+  //       this.amount = 0;
+  //     }
+  //   },
+  // },
   methods: {
     addToOrder() {
       this.amount++;
       const existingItem = this.orders.find(
-        (item) => item.orderName === this.itemName
+        (item) => item.itemId === this.id
       );
 
       if (existingItem) {
@@ -59,7 +72,7 @@ export default {
           orderName: this.itemName,
           types: this.types,
           price: this.price,
-          amount: this.amount,
+          amount: this.defaultAmount,
           totalPrice: this.totalPrice,
         });
       }
@@ -69,7 +82,7 @@ export default {
     removeOrder() {
       this.amount--;
       const existingItem = this.orders.find(
-        (item) => item.orderName === this.itemName
+        (item) => item.itemId === this.id
       );
 
       if (existingItem.amount > 0) {
