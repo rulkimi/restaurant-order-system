@@ -9,7 +9,7 @@
     </div> -->
     <div class="price-and-quantity">
       <h4>${{ price }}</h4>
-      <button @click="removeOrder">-</button>
+      <button v-if="this.amount" @click="removeOrder">-</button>
       <input type="number" v-model="amount"/>
       <button @click="addToOrder">+</button>
     </div>
