@@ -8,10 +8,12 @@
       <base-button link :to="viewDetailsLink" mode="outline">View details</base-button>
     </div> -->
     <div class="price-and-quantity">
-      <h4>${{ price }}</h4>
-      <button v-if="this.amount" @click="removeOrder">-</button>
-      <input type="number" v-model="amount"/>
-      <button @click="addToOrder">+</button>
+      <h4>${{ price }}/pc</h4>
+      <div>
+        <button v-if="this.amount" @click="removeOrder">-</button>
+        <input type="number" v-model="amount"/>
+        <button @click="addToOrder">+</button>
+      </div>
     </div>
   </li>
 </template>
@@ -130,17 +132,29 @@ h4 {
 }
 
 .price-and-quantity {
-  display: flex;
-  justify-content: space-between; /* This aligns price and input to the sides */
-  align-items: center; /* This centers them vertically */
+  display: grid;
+  grid-template-columns: 1fr 20px; /* Reversed the order of columns */
+  align-items: center;
 }
+
+.price-and-quantity h4 {
+  text-align: left; /* Align the price to the left */
+}
+
+.price-and-quantity div {
+  display: flex;
+  justify-content: flex-end; /* Align the button and input to the right */
+}
+
 
 .price-and-quantity input {
   width: 40px; /* Adjust the width as needed */
   text-align: center; /* Center the text inside the input */
 }
-
-div {
-  margin: 0.5rem 0;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+
 </style>
