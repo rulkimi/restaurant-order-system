@@ -1,0 +1,8 @@
+[
+  {
+    "itemId": "m1",
+    "orderName": "Burger",
+    "types": ["western", "food"],
+    "price": 30
+  }
+]
