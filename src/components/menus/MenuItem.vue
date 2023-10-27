@@ -39,9 +39,10 @@ export default {
       get() {
         //get order amount from 'database'
         const orders = this.$store.getters['orders/orders'];
-        const existingItem = orders.find(
-          (item) => item.itemId === this.id
-        );
+        // const existingItem = orders.find(
+        //   (item) => item.itemId === this.id
+        // );
+        const existingItem = this.checkExistingItem();
         return existingItem ? existingItem.amount : 0;
       },
       set(value) {
@@ -57,11 +58,18 @@ export default {
   //   },
   // },
   methods: {
-    addToOrder() {
-      this.amount++;
+    checkExistingItem() {
       const existingItem = this.orders.find(
         (item) => item.itemId === this.id
       );
+      return existingItem;
+    },
+    addToOrder() {
+      this.amount++;
+      // const existingItem = this.orders.find(
+      //   (item) => item.itemId === this.id
+      // );
+      const existingItem = this.checkExistingItem();
 
       if (existingItem) {
         existingItem.amount++;
@@ -81,9 +89,11 @@ export default {
     },
     removeOrder() {
       this.amount--;
-      const existingItem = this.orders.find(
-        (item) => item.itemId === this.id
-      );
+      // const existingItem = this.orders.find(
+      //   (item) => item.itemId === this.id
+      // );
+
+      const existingItem = this.checkExistingItem();
 
       if (existingItem.amount > 0) {
         existingItem.amount--;
