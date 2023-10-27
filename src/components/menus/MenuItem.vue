@@ -1,5 +1,5 @@
 <template>
-  <li @click="addToOrder">
+  <li>
     <h3>{{ itemName }}</h3>
     <!-- <div>
       <base-badge v-for="typez in types" :key="typez" :type="typez"></base-badge>
@@ -9,7 +9,9 @@
     </div> -->
     <div class="price-and-quantity">
       <h4>${{ price }}</h4>
-      <input type="number" v-model="amount" @click.stop />
+      <button @click="removeOrder">-</button>
+      <input type="number" v-model="amount"/>
+      <button @click="addToOrder">+</button>
     </div>
   </li>
 </template>
@@ -50,6 +52,7 @@ export default {
 
       if (existingItem) {
         existingItem.amount++;
+        existingItem.totalPrice = existingItem.amount * existingItem.price;
       } else {
         this.orders.push({
           itemId: this.id,
@@ -63,6 +66,18 @@ export default {
 
       console.log(this.orders);
     },
+    removeOrder() {
+      this.amount--;
+      const existingItem = this.orders.find(
+        (item) => item.orderName === this.itemName
+      );
+
+      if (existingItem.amount > 0) {
+        existingItem.amount--;
+        existingItem.totalPrice = existingItem.amount * existingItem.price;
+      }
+      console.log(this.orders);
+    }
   },
 };
 </script>
