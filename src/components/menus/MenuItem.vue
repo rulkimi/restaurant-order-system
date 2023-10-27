@@ -3,11 +3,11 @@
     <h3>{{ itemName }}</h3>
     <h4>${{ price }}</h4>
     <div>
-      <base-badge v-for="type in types" :key="type" :type="type"></base-badge>
+      <base-badge v-for="typez in types" :key="typez" :type="typez"></base-badge>
     </div>
-    <div class="actions">
+    <!-- <div class="actions">
       <base-button link :to="viewDetailsLink" mode="outline">View details</base-button>
-    </div>
+    </div> -->
   </li>
 </template>
 
@@ -15,9 +15,9 @@
 export default {
   props: ['id', 'itemName', 'price', 'types'],
   computed: {
-    viewDetailsLink() {
-      return `${this.$route.path}/${this.id}`;
-    }
+    // viewDetailsLink() {
+    //   return { name: 'menus-id', params: { id: this.id } };
+    // },
   }
 }
 </script>
@@ -28,6 +28,13 @@ li {
   border: 1px solid #424242;
   border-radius: 12px;
   padding: 1rem;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgb(226, 226, 226);
+  border: none;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
 }
 
 h3 {

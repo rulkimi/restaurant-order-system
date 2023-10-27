@@ -6,7 +6,7 @@
         <base-button mode="outline">Refresh</base-button>
         <base-button link to="/create">Create New Menu</base-button>
       </div>
-      <ul v-if="hasMenus">
+      <ul v-if="hasMenus" class="two-columns">
         <menu-item
           v-for="menu in filteredMenus"
           :key="menu.id"
@@ -44,6 +44,11 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 20px;
 }
 
 .controls {
