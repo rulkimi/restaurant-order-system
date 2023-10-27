@@ -9,7 +9,7 @@
     </div> -->
     <div class="price-and-quantity">
       <h4>${{ price }}</h4>
-      <input type="number" v-model="amount" @click.stop>
+      <input type="number" v-model="amount" @click.stop />
     </div>
   </li>
 </template>
@@ -19,27 +19,52 @@ export default {
   props: ['id', 'itemName', 'price', 'types'],
   data() {
     return {
-      amount: 0
+      amount: 0,
+      order: [],
     };
   },
   computed: {
     // viewDetailsLink() {
     //   return { name: 'menus-id', params: { id: this.id } };
     // },
+    orders() {
+      return this.$store.getters['orders/orders'];
+    },
+    totalPrice() {
+      return this.amount * this.price;
+    },
   },
   watch: {
     amount(value) {
       if (value < 0) {
         this.amount = 0;
       }
-    }
+    },
   },
   methods: {
     addToOrder() {
       this.amount++;
-    }
-  }
-}
+      const existingItem = this.orders.find(
+        (item) => item.orderName === this.itemName
+      );
+
+      if (existingItem) {
+        existingItem.amount++;
+      } else {
+        this.orders.push({
+          itemId: this.id,
+          orderName: this.itemName,
+          types: this.types,
+          price: this.price,
+          amount: this.amount,
+          totalPrice: this.totalPrice,
+        });
+      }
+
+      console.log(this.orders);
+    },
+  },
+};
 </script>
 
 <style scoped>

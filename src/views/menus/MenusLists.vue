@@ -6,17 +6,20 @@
         <base-button mode="outline">Refresh</base-button>
         <base-button link to="/create">Create New Menu</base-button>
       </div>
-      <ul v-if="hasMenus" class="two-columns">
-        <menu-item
-          v-for="menu in filteredMenus"
-          :key="menu.id"
-          :id="menu.id"
-          :itemName="menu.itemName"
-          :price="menu.price"
-          :types="menu.types"
-        ></menu-item>
-      </ul>
-      <h3 v-else>No menus found</h3>
+      <form @submit.prevent>
+        <base-button @order-placed="ordersPlaced">Place Order</base-button>
+        <ul v-if="hasMenus" class="two-columns">
+          <menu-item
+            v-for="menu in filteredMenus"
+            :key="menu.id"
+            :id="menu.id"
+            :itemName="menu.itemName"
+            :price="menu.price"
+            :types="menu.types"
+          ></menu-item>
+        </ul>
+        <h3 v-else>No menus found</h3>
+      </form>
     </base-card>
   </section>
 </template>
@@ -36,6 +39,13 @@ export default {
       return this.$store.getters['menus/hasMenus'];
     },
   },
+  methods: {
+    ordersPlaced(eventData) {
+      const array = [];
+      array.push(eventData);
+      console.log('logs here');
+    }
+  }
 };
 </script>
 
