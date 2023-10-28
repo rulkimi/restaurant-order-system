@@ -7,7 +7,11 @@
         <base-button link to="/create">Create New Menu</base-button>
       </div>
       <form @submit.prevent>
-        <base-button @click="placeOrders">Place Order</base-button>
+        <router-link to="/orders">
+          <base-button @click="placeOrders">
+            Place Orders
+          </base-button>
+        </router-link>
         <ul v-if="hasMenus" class="two-columns">
           <menu-item
             v-for="menu in filteredMenus"
