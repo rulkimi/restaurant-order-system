@@ -7,7 +7,7 @@
         <base-button link to="/create">Create New Menu</base-button>
       </div>
       <form @submit.prevent>
-        <base-button @order-placed="ordersPlaced">Place Order</base-button>
+        <base-button @click="placeOrders">Place Order</base-button>
         <ul v-if="hasMenus" class="two-columns">
           <menu-item
             v-for="menu in filteredMenus"
@@ -38,12 +38,13 @@ export default {
     hasMenus() {
       return this.$store.getters['menus/hasMenus'];
     },
+    orders() {
+      return this.$store.getters['orders/orders'];
+    }
   },
   methods: {
-    ordersPlaced(eventData) {
-      const array = [];
-      array.push(eventData);
-      console.log('logs here');
+    placeOrders() {
+      console.log(this.orders);
     }
   }
 };

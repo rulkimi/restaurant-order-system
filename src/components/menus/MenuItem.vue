@@ -35,7 +35,7 @@ export default {
       return this.$store.getters['orders/orders'];
     },
     totalPrice() {
-      return this.amount * this.price;
+      return this.defaultAmount * this.price;
     },
     amount: {
       get() {
@@ -86,8 +86,8 @@ export default {
           totalPrice: this.totalPrice,
         });
       }
-
       console.log(this.orders);
+      // this.$store.commit('orders/updateOrders', this.orders);
     },
     removeOrder() {
       this.amount--;
