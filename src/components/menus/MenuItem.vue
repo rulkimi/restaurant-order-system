@@ -87,7 +87,7 @@ export default {
         });
       }
       console.log(this.orders);
-      // this.$store.commit('orders/updateOrders', this.orders);
+      this.$store.commit('orders/updateOrders', this.orders);
     },
     removeOrder() {
       this.amount--;

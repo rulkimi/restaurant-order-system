@@ -1,5 +1,5 @@
-// export default {
-//   updateOrders(state, payload) {
-//     state.orders = payload;
-//   }
-// }
+export default {
+  updateOrders(state, payload) {
+    state.orders = payload;
+  }
+}
