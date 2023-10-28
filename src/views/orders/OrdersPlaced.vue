@@ -7,14 +7,14 @@
           <div>
             ({{ order.amount }}
             x
-            ${{ order.price }})
+            ${{ order.price.toFixed(2) }})
             Price:
-            ${{ order.totalPrice }}
+            ${{ order.totalPrice.toFixed(2) }}
           </div>
         </div>
       </li>
     </ul>
-    <div class="total-price">Total: ${{ ordersTotalPrice }}</div>
+    <div class="total-price">Total: ${{ ordersTotalPrice.toFixed(2) }}</div>
   </base-card>
 </template>
 

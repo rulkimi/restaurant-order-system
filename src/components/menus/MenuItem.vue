@@ -8,7 +8,7 @@
       <base-button link :to="viewDetailsLink" mode="outline">View details</base-button>
     </div> -->
     <div class="price-and-quantity">
-      <h4>${{ price }}/pc</h4>
+      <h4>${{ price.toFixed(2) }}/pc</h4>
       <div>
         <button v-if="this.amount" @click="removeOrder">-</button>
         <input type="number" v-model="amount"/>

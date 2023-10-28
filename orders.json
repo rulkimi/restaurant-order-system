@@ -3,8 +3,8 @@
     "itemId": "m1",
     "orderName": "Burger",
     "types": ["western", "food"],
-    "price": 30,
+    "price": 30.75,
     "amount": 1,
-    "totalPrice": 30
+    "totalPrice": 30.75
   }
 ]
