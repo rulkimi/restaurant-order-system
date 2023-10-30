@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  emits: ['remove-order'],
   props: ['id', 'itemName', 'price', 'types'],
   data() {
     //default amount is when theres no item found, we add 1 to the amount
@@ -100,8 +101,10 @@ export default {
       if (existingItem.amount > 0) {
         existingItem.amount--;
         existingItem.totalPrice = existingItem.amount * existingItem.price;
-      } else {
-        this.orders.splice()
+      } 
+
+      if (existingItem.amount === 0) {
+        this.$emit('remove-order');
       }
       console.log(this.orders);
     }

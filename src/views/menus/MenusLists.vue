@@ -16,12 +16,13 @@
         </router-link>
         <ul v-if="hasMenus" class="two-columns">
           <menu-item
-            v-for="menu in filteredMenus"
+            v-for="(menu, index) in filteredMenus"
             :key="menu.id"
             :id="menu.id"
             :itemName="menu.itemName"
             :price="menu.price"
             :types="menu.types"
+            @remove-order="removeOrder(index)"
           ></menu-item>
         </ul>
         <h3 v-else>No menus found</h3>
@@ -82,6 +83,9 @@ export default {
     },
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
+    },
+    removeOrder(index) {
+      this.orders.splice(index, 1);
     }
   }
 };
