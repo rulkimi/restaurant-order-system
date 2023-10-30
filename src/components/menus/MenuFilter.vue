@@ -9,10 +9,10 @@
       <input type="checkbox" id="western" checked @change="setFilter"/>
       <label for="western">Western</label>
     </span>
-    <span class="filter-option">
+    <!-- <span class="filter-option">
       <input type="checkbox" id="food" checked @change="setFilter"/>
       <label for="food">Food</label>
-    </span>
+    </span> -->
     <span class="filter-option">
       <input type="checkbox" id="drink" checked @change="setFilter"/>
       <label for="drink">Drink</label>

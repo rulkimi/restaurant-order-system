@@ -51,6 +51,7 @@ export default {
   },
   computed: {
     filteredMenus() {
+      //fix this - how to get it updated? - mutations?
       const menus = this.$store.getters['menus/menus'];
       return menus.filter(menu => {
         if (this.activeFilters.asian && menu.types.includes('asian')) {
@@ -59,9 +60,9 @@ export default {
         if (this.activeFilters.western && menu.types.includes('western')) {
           return true;
         }
-        if (this.activeFilters.food && menu.types.includes('food')) {
-          return true;
-        }
+        // if (this.activeFilters.food && menu.types.includes('food')) {
+        //   return true;
+        // }
         if (this.activeFilters.drink && menu.types.includes('drink')) {
           return true;
         }

@@ -19,16 +19,16 @@
 
       <div class="form-control">
         <label>Types</label>
-        <input type="checkbox" id="asian" v-model="menu.types" value="Asian">
+        <input type="checkbox" id="asian" v-model="menu.types" value="asian">
         <label for="asian">Asian</label>
 
-        <input type="checkbox" id="western" v-model="menu.types" value="Western">
+        <input type="checkbox" id="western" v-model="menu.types" value="western">
         <label for="western">Western</label>
-
+<!-- 
         <input type="checkbox" id="food" v-model="menu.types" value="Food">
-        <label for="food">Food</label>
+        <label for="food">Food</label> -->
 
-        <input type="checkbox" id="drink" v-model="menu.types" value="Drink">
+        <input type="checkbox" id="drink" v-model="menu.types" value="drink">
         <label for="drink">Drink</label>
       </div>
 
@@ -66,6 +66,7 @@ export default {
         price: this.price,
       };
       this.menus.unshift(newMenu);
+      console.log(newMenu);
     }
   }
 }
