@@ -80,7 +80,7 @@ export default {
         this.orders.push({
           itemId: this.id,
           orderName: this.itemName,
-          types: this.types,
+          types: Array.from(this.types),
           price: this.price,
           amount: this.defaultAmount,
           totalPrice: this.totalPrice,

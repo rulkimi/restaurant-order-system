@@ -14,7 +14,12 @@
         </div>
       </li>
     </ul>
-    <div class="total-price">Total: ${{ ordersTotalPrice.toFixed(2) }}</div>
+    <router-link to="/menus">
+      <base-button>Edit orders</base-button>
+    </router-link>
+    <div class="total-price">
+      Total: ${{ ordersTotalPrice.toFixed(2) }}
+    </div>
   </base-card>
 </template>
 
