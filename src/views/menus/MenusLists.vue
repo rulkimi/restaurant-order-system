@@ -1,5 +1,7 @@
 <template>
-  <section>Filter</section>
+  <section>
+    <menu-filter @change-filter="setFilters"></menu-filter>
+  </section>
   <section>
     <base-card>
       <div class="controls">
@@ -30,14 +32,41 @@
 
 <script>
 import MenuItem from '../../components/menus/MenuItem.vue';
+import MenuFilter from '@/components/menus/MenuFilter.vue';
 
 export default {
   components: {
     MenuItem,
+    MenuFilter
+  },
+  data() {
+    return {
+      activeFilters: {
+        asian: true,
+        western: true,
+        food: true,
+        drink: true
+      }
+    }
   },
   computed: {
     filteredMenus() {
-      return this.$store.getters['menus/menus'];
+      const menus = this.$store.getters['menus/menus'];
+      return menus.filter(menu => {
+        if (this.activeFilters.asian && menu.types.includes('asian')) {
+          return true;
+        }
+        if (this.activeFilters.western && menu.types.includes('western')) {
+          return true;
+        }
+        if (this.activeFilters.food && menu.types.includes('food')) {
+          return true;
+        }
+        if (this.activeFilters.drink && menu.types.includes('drink')) {
+          return true;
+        }
+        return false;
+      });
     },
     hasMenus() {
       return this.$store.getters['menus/hasMenus'];
@@ -49,6 +78,9 @@ export default {
   methods: {
     placeOrders() {
       console.log(this.orders);
+    },
+    setFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     }
   }
 };

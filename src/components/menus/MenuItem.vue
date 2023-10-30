@@ -100,6 +100,8 @@ export default {
       if (existingItem.amount > 0) {
         existingItem.amount--;
         existingItem.totalPrice = existingItem.amount * existingItem.price;
+      } else {
+        this.orders.splice()
       }
       console.log(this.orders);
     }
