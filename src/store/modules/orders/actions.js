@@ -1,5 +1,5 @@
 export default {
-  addOrder(context, payload) {
+  async addOrder(context, payload) {
     const newOrder = {
       itemId: payload.itemId,
       orderName: payload.orderName,
