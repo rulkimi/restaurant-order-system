@@ -78,14 +78,16 @@ export default {
         existingItem.amount++;
         existingItem.totalPrice = existingItem.amount * existingItem.price;
       } else {
-        this.orders.push({
+        const newOrder = {
           itemId: this.id,
           orderName: this.itemName,
           types: Array.from(this.types),
           price: this.price,
           amount: this.defaultAmount,
           totalPrice: this.totalPrice,
-        });
+        }
+        this.$store.dispatch('orders/addOrder', newOrder);
+        // this.orders.push(newOrder);
       }
       console.log(this.orders);
       this.$store.commit('orders/updateOrders', this.orders);

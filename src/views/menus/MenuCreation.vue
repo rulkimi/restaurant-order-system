@@ -65,7 +65,8 @@ export default {
         description: this.description,
         price: this.price,
       };
-      this.menus.unshift(newMenu);
+      // this.menus.unshift(newMenu);
+      this.$store.dispatch('menus/saveMenu', newMenu);
       console.log(newMenu);
     }
   }
