@@ -36,6 +36,9 @@ export default {
       });
       return total;
     }
+  },
+  created() {
+    this.$store.dispatch('orders/loadOrders');
   }
 }
 </script>

@@ -1,5 +1,5 @@
 export default {
-  async addOrder(context, payload) {
+  addOrder(context, payload) {
     const newOrder = {
       itemId: payload.itemId,
       orderName: payload.orderName,
@@ -10,5 +10,31 @@ export default {
     }
 
     context.commit('addOrder', newOrder);
+  },
+  async placeOrder(context, payload) {
+    const response = await fetch('https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json', {
+      method: 'PUT',
+      body: JSON.stringify(payload)
+    });
+  },
+  async loadOrders(context, payload) {
+    const response = await fetch('https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json');
+
+    const responseData = await response.json();
+
+    const orders = [];
+
+    for (const key in responseData) {
+      const order = {
+        id: responseData[key].itemId,
+        orderName: responseData[key].orderName,
+        types: responseData[key].types,
+        totalPrice: responseData[key].totalPrice,
+        price: responseData[key].price,
+      };
+      orders.push(order);
+    }
+
+    context.commit('setOrders', orders);
   }
 }

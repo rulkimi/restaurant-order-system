@@ -4,5 +4,8 @@ export default {
   },
   addOrder(state, payload) {
     state.orders.push(payload);
+  },
+  setOrders(state, payload) {
+    state.orders = payload;
   }
 }
