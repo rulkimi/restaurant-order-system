@@ -38,7 +38,12 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('orders/loadOrders');
+    this.loadOrders();
+  },
+  methods: {
+    loadOrders() {
+      this.$store.dispatch('orders/loadOrders');
+    }
   }
 }
 </script>

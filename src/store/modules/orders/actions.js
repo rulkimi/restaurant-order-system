@@ -26,7 +26,8 @@ export default {
 
     for (const key in responseData) {
       const order = {
-        id: responseData[key].itemId,
+        itemId: responseData[key].itemId,
+        amount: responseData[key].amount,
         orderName: responseData[key].orderName,
         types: responseData[key].types,
         totalPrice: responseData[key].totalPrice,
@@ -35,6 +36,6 @@ export default {
       orders.push(order);
     }
 
-    context.commit('setOrders', orders);
+    context.commit('updateOrders', orders);
   }
 }

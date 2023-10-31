@@ -79,11 +79,13 @@ export default {
   },
   created() {
     this.loadMenus();
+    this.loadOrders();
   },
   methods: {
     placeOrders() {
       console.log(this.orders);
       this.$store.dispatch('orders/placeOrder', this.orders);
+      this.loadOrders();
     },
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
@@ -100,6 +102,9 @@ export default {
     },
     loadMenus() {
       this.$store.dispatch('menus/loadMenus');
+    },
+    loadOrders() {
+      this.$store.dispatch('orders/loadOrders');
     }
   }
 };
