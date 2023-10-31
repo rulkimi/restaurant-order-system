@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
+
 export default {
   data() {
     return {
@@ -59,7 +61,7 @@ export default {
   methods: {
     saveMenu() {
       const newMenu = {
-        id: 'm30',
+        id: uuidv4(),
         itemName: this.itemName,
         types: this.menu.types,
         description: this.description,

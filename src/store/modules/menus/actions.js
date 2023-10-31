@@ -1,6 +1,6 @@
 export default {
   async saveMenu(context, data) {
-    const id = 'm30';
+    const id = data.id;
     const newMenu = {
       itemName: data.itemName,
       types: data.types,
@@ -21,7 +21,7 @@ export default {
 
     context.commit('saveMenu', newMenu);
   },
-  async loadMenus(context) {
+  async loadMenus(context, payload) {
     const response = await fetch('https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/menus.json');
 
     const responseData = await response.json();
