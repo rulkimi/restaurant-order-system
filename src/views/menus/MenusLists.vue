@@ -5,7 +5,7 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
+        <base-button mode="outline" @click="loadMenus">Refresh</base-button>
         <base-button link to="/create">Create New Menu</base-button>
       </div>
       <form @submit.prevent>
@@ -77,6 +77,9 @@ export default {
       return this.$store.getters['orders/orders'];
     }
   },
+  created() {
+    this.loadMenus();
+  },
   methods: {
     placeOrders() {
       console.log(this.orders);
@@ -93,6 +96,9 @@ export default {
         this.orders.splice(index, 1);
         console.log('Order removed:', menuId);
       }
+    },
+    loadMenus() {
+      this.$store.dispatch('menus/loadMenus');
     }
   }
 };
