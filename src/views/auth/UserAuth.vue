@@ -10,8 +10,7 @@
         <input type="password" id="password" v-model="password" />
       </div>
       <p v-if="!formIsValid">
-        Please enter a valid email and password (must be at least 6 characters
-        long)
+        {{ invalidMessage }}
       </p>
       <base-button>{{ submitButtonCaption }}</base-button>
       <base-button type="button" mode="flat" @click="switchAuthMode">{{
@@ -28,6 +27,7 @@ export default {
       email: '',
       password: '',
       formIsValid: true,
+      invalidMessage: `Please enter a valid email and password (must be at least 6 characters long)`,
       mode: 'login',
     };
   },

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import store from '../store/index.js';
 
 const routes = [
   {
@@ -17,6 +18,14 @@ const routes = [
   {
     path: '/create',
     component: () => import('../views/menus/MenuCreation.vue'),
+    beforeEnter: (to, from, next) => {
+      // Your authentication logic here
+      if (!store.getters.isAuthenticated) {
+        next('/auth'); // Redirect to the login route
+      } else {
+        next(); // Allow access to the route
+      }
+    },
   },
   {
     path: '/orders',
