@@ -23,6 +23,10 @@ const routes = [
     component: () => import('../views/orders/OrdersPlaced.vue'),
   },
   {
+    path: '/auth',
+    component: () => import('../views/auth/UserAuth.vue'),
+  },
+  {
     path: '/:notFound(.*)',
     component: () => import('../views/NotFound.vue'),
   },
