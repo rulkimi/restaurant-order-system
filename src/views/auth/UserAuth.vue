@@ -71,6 +71,7 @@ export default {
         } else {
           await this.$store.dispatch('signup', actionPayLoad);
         }
+        this.$router.replace('/menus');
       } catch (err) {
         console.log(err.message);
       }
