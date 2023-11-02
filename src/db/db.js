@@ -195,17 +195,13 @@ const db = new sqlite3.Database('menu.db');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3000; // Choose your desired port
+const port = 3000; 
 
 app.use(cors());
-
-// Middleware to parse JSON requests
 app.use(express.json());
 
-// Define your routes here
 app.get('/menus', (req, res) => {
   // Handle GET request for menus
-  // You can query the database and send the response here
   let sql = ` 
     SELECT item_id itemId, item_name itemName, item_types types, item_description description, item_price price
     FROM menu_items;             
@@ -222,7 +218,6 @@ app.get('/menus', (req, res) => {
 
 app.post('/orders', (req, res) => {
   // Handle POST request for orders
-  // Insert data into the database and send a response
 });
 
 app.listen(port, () => {
