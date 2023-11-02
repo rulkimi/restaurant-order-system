@@ -22,7 +22,7 @@ export default {
     context.commit('saveMenu', newMenu);
   },
   async loadMenus(context, payload) {
-    const response = await fetch('https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/menus.json');
+    const response = await fetch('http://localhost:3000/menus');
 
     const responseData = await response.json();
 

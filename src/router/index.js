@@ -19,11 +19,10 @@ const routes = [
     path: '/create',
     component: () => import('../views/menus/MenuCreation.vue'),
     beforeEnter: (to, from, next) => {
-      // Your authentication logic here
       if (!store.getters.isAuthenticated) {
-        next('/auth'); // Redirect to the login route
+        next('/auth'); 
       } else {
-        next(); // Allow access to the route
+        next();
       }
     },
   },
