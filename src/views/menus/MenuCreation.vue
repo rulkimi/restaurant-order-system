@@ -69,7 +69,7 @@ export default {
       };
       // this.menus.unshift(newMenu);
       this.$store.dispatch('menus/saveMenu', newMenu);
-      console.log(newMenu);
+      // console.log(newMenu);
     }
   }
 }

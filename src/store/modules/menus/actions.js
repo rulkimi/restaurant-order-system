@@ -1,17 +1,25 @@
 export default {
   async saveMenu(context, data) {
-    const id = data.id;
     const newMenu = {
+      itemId: data.id,
       itemName: data.itemName,
       types: data.types,
       description: data.description,
       price: data.price,
     };
 
-    const response = await fetch(`https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/menus/${id}.json`, {
-      method: 'PUT',
-      body: JSON.stringify(newMenu)
+    const response = await fetch('http://localhost:3000/menus', {
+      method: 'POST',
+      body: JSON.stringify(newMenu),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
+
+    const responseData = await response.json();
+
+    console.log(response)
+    console.log(responseData);
 
     //const responseData = await response.json();
 

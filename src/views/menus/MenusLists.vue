@@ -6,7 +6,7 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline" @click="loadMenus">Refresh</base-button>
-        <base-button link to="/create" v-if="isAuthenticated">Create New Menu</base-button>
+        <base-button link to="/create">Create New Menu</base-button>
       </div>
       <form @submit.prevent>
         <router-link to="/orders">
