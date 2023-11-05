@@ -95,7 +95,6 @@ const menuData = {
 
 const seedDatabase = async () => {
   try {
-    // Insert menu data into the database
     const promises = Object.entries(menuData).map(
       async ([itemCode, menuItem]) => {
         try {
@@ -123,12 +122,11 @@ const seedDatabase = async () => {
 
     await Promise.all(promises);
 
-    // Retrieve and display the inserted data
+    // to show all items from database created
     db.all('SELECT * FROM menu_items', (err, rows) => {
       if (err) {
         console.error(err.message);
       } else {
-        // Display the retrieved data
         rows.forEach((row) => {
           console.log(`Item ID: ${row.item_id}`);
           console.log(`Item Name: ${row.item_name}`);
@@ -140,7 +138,6 @@ const seedDatabase = async () => {
       }
     });
 
-    // Close the database when done
     db.close();
   } catch (err) {
     console.error('Error occurred during insertion:', err.message);
