@@ -22,7 +22,6 @@
             :itemName="menu.itemName"
             :price="menu.price"
             :types="menu.types"
-            @remove-order="removeOrder(menu.id)"
           ></menu-item>
         </ul>
         <h3 v-else>No menus found</h3>
@@ -93,16 +92,16 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    removeOrder(menuId) {
-      // Use findIndex to get the index of the order with the matching ID
-      const index = this.orders.findIndex(order => order.itemId === menuId);
+    // removeOrder(menuId) {
+    //   // Use findIndex to get the index of the order with the matching ID
+    //   const index = this.orders.findIndex(order => order.itemId === menuId);
 
-      if (index !== -1) {
-        // If a matching order is found, remove it
-        this.orders.splice(index, 1);
-        console.log('Order removed:', menuId);
-      }
-    },
+    //   if (index !== -1) {
+    //     // If a matching order is found, remove it
+    //     this.orders.splice(index, 1);
+    //     console.log('Order removed:', menuId);
+    //   }
+    // },
     loadMenus() {
       this.$store.dispatch('menus/loadMenus');
     },
