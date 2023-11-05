@@ -11,8 +11,32 @@ app.use(express.json());
 
 app.get('/menus', (req, res) => {
   let sql = ` 
-    SELECT item_id itemId, item_name itemName, item_types types, item_description description, item_price price
+    SELECT item_id itemId,
+    item_name itemName,
+    item_types types,
+    item_description description,
+    item_price price
     FROM menu_items;             
+  `;
+  db.all(sql, (err, rows) => {
+    if (err) {
+      throw err;
+      console.log(err);
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+app.get('/orders', (req, res) => {
+  let sql = `
+    SELECT item_id itemId,
+    item_name orderName,
+    item_types types,
+    item_price price,
+    item_amount amount,
+    item_total_price totalPrice
+    FROM order_items
   `;
   db.all(sql, (err, rows) => {
     if (err) {
@@ -49,6 +73,7 @@ app.post('/menus', (req, res) => {
     }
   });
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

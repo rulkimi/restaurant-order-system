@@ -18,7 +18,7 @@ export default {
     });
   },
   async loadOrders(context, payload) {
-    const response = await fetch('https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json');
+    const response = await fetch('http://localhost:3000/orders');
 
     const responseData = await response.json();
 

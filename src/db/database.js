@@ -54,6 +54,7 @@ const createTables = async () => {
         item_name TEXT,
         item_types TEXT,
         item_price REAL,
+        item_amount INTEGER,
         item_total_price REAL
       )
       `,
