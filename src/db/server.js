@@ -95,6 +95,7 @@ app.post('/orders', (req, res) => {
   });
 });
 
+// Handle the PUT request to update or create an order.
 app.put('/orders/:itemId', (req, res) => {
   const itemId = req.params.itemId;
   const { amount } = req.body;
@@ -106,25 +107,31 @@ app.put('/orders/:itemId', (req, res) => {
     }
 
     if (row) {
-      // The order exists, so update the amount.
-      const updatedAmount = row.item_amount + amount;
-      db.run('UPDATE order_items SET item_amount = ? WHERE item_id = ?', [updatedAmount, itemId], (err) => {
-        if (err) {
-          return res.status(500).json({ error: err.message });
-        }
-        return res.status(200).json({ message: 'Order updated successfully', updatedItemId: itemId });
-      });
+      // The order exists. Check if the new amount is different.
+      if (amount !== row.item_amount) {
+        // Update the order with the new amount.
+        db.run('UPDATE order_items SET item_amount = ? WHERE item_id = ?', [amount, itemId], (err) => {
+          if (err) {
+            return res.status(500).json({ error: err.message });
+          }
+          return res.status(200).json({ message: 'Order updated successfully', updatedItemId: itemId });
+        });
+      } else {
+        // The new amount is the same as the existing one, so no update is needed.
+        return res.status(200).json({ message: 'Order amount is the same, no update required', updatedItemId: itemId });
+      }
     } else {
+      // The order does not exist, so create a new order.
       const { itemId, orderName, types, price, amount, totalPrice } = req.body;
 
       const sql = `INSERT OR IGNORE INTO order_items (item_id, item_name, item_types, item_price, item_amount, item_total_price) VALUES (?, ?, ?, ?, ?, ?)`;
       const params = [itemId, orderName, types, price, amount, totalPrice];
-
+    
       db.run(sql, params, function (err) {
         if (err) {
           return res.status(500).json({ error: err.message });
         }
-
+    
         if (this.changes > 0) {
           console.log(`Order placed. ID: ${itemId}`);
           return res.status(201).json({ message: 'Order placed successfully', newItemId: itemId });
@@ -135,7 +142,6 @@ app.put('/orders/:itemId', (req, res) => {
     }
   });
 });
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
