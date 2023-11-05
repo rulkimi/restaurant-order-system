@@ -26,6 +26,8 @@ export default {
           throw new Error('Request failed with status', response.status);
         }
       }
+      // so the order will auto update??
+      await context.dispatch('loadOrders');
     } catch (err) {
       console.log('error: ', err);
     }

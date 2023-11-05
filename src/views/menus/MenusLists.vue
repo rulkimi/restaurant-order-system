@@ -86,8 +86,8 @@ export default {
   methods: {
     placeOrders() {
       console.log(this.orders);
+      // this.loadOrders();
       this.$store.dispatch('orders/placeOrder', this.orders);
-      this.loadOrders();
     },
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
