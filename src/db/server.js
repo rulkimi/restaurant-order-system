@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const { db } = require('./database');
-const seedDatabase = require('./seed');
 
 const app = express();
 const port = 3000;
@@ -53,5 +52,4 @@ app.post('/menus', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  seedDatabase();
 });

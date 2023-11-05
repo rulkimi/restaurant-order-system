@@ -1,4 +1,4 @@
-const { db, runPromise } = require('./database');
+//const { db, runPromise } = require('./database');
 
 const menuData = {
   m1: {
@@ -94,6 +94,7 @@ const menuData = {
 };
 
 const seedDatabase = async () => {
+  const { db, runPromise } = require('./database');
   try {
     const promises = Object.entries(menuData).map(
       async ([itemCode, menuItem]) => {
