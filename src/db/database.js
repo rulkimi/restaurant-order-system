@@ -1,9 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
 
-// Create a new database or open an existing one
+// either create or open existing file - important!!
 const db = new sqlite3.Database('menu.db');
 
-// Promisify the db.run function
+// make the db.run function a promise
 const runPromise = (query, params) => {
   return new Promise((resolve, reject) => {
     db.run(query, params, function (err) {
@@ -17,7 +17,7 @@ const runPromise = (query, params) => {
 };
 
 // Create a table for menu items
-db.run(
+runPromise(
   `
   CREATE TABLE IF NOT EXISTS menu_items (
     item_id TEXT PRIMARY KEY,

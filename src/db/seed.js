@@ -138,11 +138,11 @@ const seedDatabase = async () => {
       }
     });
 
-    db.close();
+    // db.close();
   } catch (err) {
     console.error('Error occurred during insertion:', err.message);
   }
 };
 
-seedDatabase();
+module.exports = seedDatabase;
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { db } = require('./database');
+const seedDatabase = require('./seed');
 
 const app = express();
 const port = 3000;
@@ -10,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/menus', (req, res) => {
-  // Handle GET request for menus
   let sql = ` 
     SELECT item_id itemId, item_name itemName, item_types types, item_description description, item_price price
     FROM menu_items;             
@@ -26,11 +26,9 @@ app.get('/menus', (req, res) => {
 });
 
 app.post('/menus', (req, res) => {
-  // Handle POST request to create a new menu item
   console.log(req.body);
   const { itemId, itemName, types, description, price } = req.body;
 
-  // Ensure all required fields are provided
   if (!itemId || !itemName || !types || !description || !price) {
     return res.status(400).json({ error: 'All fields are required for a new menu item.' });
   }
@@ -55,4 +53,5 @@ app.post('/menus', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  seedDatabase();
 });
