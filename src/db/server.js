@@ -98,7 +98,7 @@ app.post('/orders', (req, res) => {
 // Handle the PUT request to update or create an order.
 app.put('/orders/:itemId', (req, res) => {
   const itemId = req.params.itemId;
-  const { amount } = req.body;
+  const { amount, totalPrice } = req.body;
 
   // Check if the order with the given itemId exists in the database.
   db.get('SELECT * FROM order_items WHERE item_id = ?', [itemId], (err, row) => {
@@ -110,7 +110,7 @@ app.put('/orders/:itemId', (req, res) => {
       // The order exists. Check if the new amount is different.
       if (amount !== row.item_amount) {
         // Update the order with the new amount.
-        db.run('UPDATE order_items SET item_amount = ? WHERE item_id = ?', [amount, itemId], (err) => {
+        db.run('UPDATE order_items SET item_amount = ?, item_total_price = ? WHERE item_id = ?', [amount, totalPrice, itemId], (err) => {
           if (err) {
             return res.status(500).json({ error: err.message });
           }
