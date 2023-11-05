@@ -12,10 +12,23 @@ export default {
     context.commit('addOrder', newOrder);
   },
   async placeOrder(context, payload) {
-    const response = await fetch('https://restaurant-system-760df-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json', {
-      method: 'PUT',
-      body: JSON.stringify(payload)
-    });
+    try {
+      for (const order of payload) {
+        const response = await fetch(`http://localhost:3000/orders/${order.itemId}`, {
+          method: 'PUT',
+          body: JSON.stringify(order),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Request failed with status', response.status);
+        }
+      }
+    } catch (err) {
+      console.log('error: ', err);
+    }
   },
   async loadOrders(context, payload) {
     const response = await fetch('http://localhost:3000/orders');

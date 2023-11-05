@@ -1,15 +1,15 @@
 <template>
   <base-card>
-    <ul>
+    <ul v-if="hasOrders">
       <li v-for="order in orders" :key="order.itemId">
         <div class="container">
           <h4>{{ order.orderName }}</h4>
           <div>
             ({{ order.amount }}
             x
-            ${{ order.price.toFixed(2) }})
+            ${{ order.price?.toFixed(2) }})
             Price:
-            ${{ order.totalPrice.toFixed(2) }}
+            ${{ order.totalPrice?.toFixed(2) }}
           </div>
         </div>
       </li>
@@ -35,6 +35,9 @@ export default {
         total += item.totalPrice;
       });
       return total;
+    },
+    hasOrders() {
+      return this.$store.getters['orders/hasOrders'];
     }
   },
   created() {
