@@ -99,6 +99,7 @@ app.post('/orders', (req, res) => {
 app.put('/orders/:itemId', (req, res) => {
   const itemId = req.params.itemId;
   const { amount, totalPrice } = req.body;
+  console.log(amount);
 
   // Check if the order with the given itemId exists in the database.
   db.get('SELECT * FROM order_items WHERE item_id = ?', [itemId], (err, row) => {
@@ -106,7 +107,18 @@ app.put('/orders/:itemId', (req, res) => {
       return res.status(500).json({ error: err.message });
     }
 
-    if (row) {
+    if (amount === 0) {
+      const sql = `
+        DELETE FROM order_items WHERE item_id = ?
+      `;
+      const params = [itemId];
+      db.run(sql, params, err => {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        return res.status(200).json({ message: 'Order removed from the database', removedItemId: itemId });
+      })
+    } else if (row) {
       // The order exists. Check if the new amount is different.
       if (amount !== row.item_amount) {
         // Update the order with the new amount.

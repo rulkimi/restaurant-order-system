@@ -105,9 +105,10 @@ export default {
         existingItem.totalPrice = existingItem.amount * existingItem.price;
       } 
 
-      if (existingItem.amount === 0) {
-        this.$emit('remove-order');
-      }
+      // if (existingItem.amount === 0) {
+      //   this.$emit('remove-order');
+      // }
+      // this.$store.commit('orders/updateOrders', this.orders);
       console.log(this.orders);
     }
   },
