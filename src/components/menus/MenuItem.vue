@@ -81,7 +81,7 @@ export default {
         const newOrder = {
           itemId: this.id,
           orderName: this.itemName,
-          types: Array.from(this.types),
+          types: this.types,
           price: this.price,
           amount: this.defaultAmount,
           totalPrice: this.totalPrice,

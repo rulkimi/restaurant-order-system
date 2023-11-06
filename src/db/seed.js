@@ -112,6 +112,22 @@ const seedDatabase = async () => {
 
           if (result.changes > 0) {
             console.log(`Inserted: ${menuItem.itemName}`);
+            
+            //display inserted menu
+            db.all('SELECT * FROM menu_items', (err, rows) => {
+              if (err) {
+                console.error(err.message);
+              } else {
+                rows.forEach((row) => {
+                  console.log(`Item ID: ${row.item_id}`);
+                  console.log(`Item Name: ${row.item_name}`);
+                  console.log(`Item Types: ${JSON.parse(row.item_types)}`);
+                  console.log(`Item Description: ${row.item_description}`);
+                  console.log(`Item Price: $${row.item_price.toFixed(2)}`);
+                  console.log('------------------------');
+                });
+              }
+            });
           } else {
             console.log(`Skipped: ${menuItem.itemName} (already exists)`);
           }
@@ -122,22 +138,6 @@ const seedDatabase = async () => {
     );
 
     await Promise.all(promises);
-
-    // to show all items from database created
-    db.all('SELECT * FROM menu_items', (err, rows) => {
-      if (err) {
-        console.error(err.message);
-      } else {
-        rows.forEach((row) => {
-          console.log(`Item ID: ${row.item_id}`);
-          console.log(`Item Name: ${row.item_name}`);
-          console.log(`Item Types: ${JSON.parse(row.item_types)}`);
-          console.log(`Item Description: ${row.item_description}`);
-          console.log(`Item Price: $${row.item_price.toFixed(2)}`);
-          console.log('------------------------');
-        });
-      }
-    });
 
     // db.close();
   } catch (err) {

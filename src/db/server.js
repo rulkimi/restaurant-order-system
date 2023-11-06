@@ -56,7 +56,7 @@ app.post('/menus', (req, res) => {
     return res.status(400).json({ error: 'All fields are required for a new menu item.' });
   }
 
-  // Insert the new menu item into the database
+  // inserting new menu into db
   const sql = `INSERT INTO menu_items (item_id, item_name, item_types, item_description, item_price) VALUES (?, ?, ?, ?, ?)`;
   const params = [itemId, itemName, JSON.stringify(types), description, price];
 
@@ -95,13 +95,12 @@ app.post('/orders', (req, res) => {
   });
 });
 
-// Handle the PUT request to update or create an order.
 app.put('/orders/:itemId', (req, res) => {
   const itemId = req.params.itemId;
   const { amount, totalPrice } = req.body;
   console.log(amount);
 
-  // Check if the order with the given itemId exists in the database.
+  // check if the order with (itemId) exists in the db.
   db.get('SELECT * FROM order_items WHERE item_id = ?', [itemId], (err, row) => {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -119,9 +118,9 @@ app.put('/orders/:itemId', (req, res) => {
         return res.status(200).json({ message: 'Order removed from the database', removedItemId: itemId });
       })
     } else if (row) {
-      // The order exists. Check if the new amount is different.
+      // if (row) = order exists. now check if the new amount is different.
       if (amount !== row.item_amount) {
-        // Update the order with the new amount.
+        // update new amount, totalprice
         db.run('UPDATE order_items SET item_amount = ?, item_total_price = ? WHERE item_id = ?', [amount, totalPrice, itemId], (err) => {
           if (err) {
             return res.status(500).json({ error: err.message });
@@ -129,11 +128,11 @@ app.put('/orders/:itemId', (req, res) => {
           return res.status(200).json({ message: 'Order updated successfully', updatedItemId: itemId });
         });
       } else {
-        // The new amount is the same as the existing one, so no update is needed.
+        // new amount is the same as the existing one, so no update is needed.
         return res.status(200).json({ message: 'Order amount is the same, no update required', updatedItemId: itemId });
       }
     } else {
-      // The order does not exist, so create a new order.
+      // order does not exist, so create a new order.
       const { itemId, orderName, types, price, amount, totalPrice } = req.body;
 
       const sql = `INSERT OR IGNORE INTO order_items (item_id, item_name, item_types, item_price, item_amount, item_total_price) VALUES (?, ?, ?, ?, ?, ?)`;
